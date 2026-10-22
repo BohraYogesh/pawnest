@@ -4,13 +4,26 @@ import { env } from "../../config/env";
 const secure = env.NODE_ENV === "production";
 
 const accessOpts: CookieOptions = {
-  httpOnly: true, secure, sameSite: "lax", path: "/", maxAge: 15 * 60 * 1000,
-};
-const refreshOpts: CookieOptions = {
-  httpOnly: true, secure, sameSite: "lax", path: "/api/v1/auth", maxAge: 7 * 24 * 60 * 60 * 1000,
+  httpOnly: true,
+  secure,
+  sameSite: secure ? "none" : "lax",
+  path: "/",
+  maxAge: 15 * 60 * 1000,
 };
 
-export function setAuthCookies(res: Response, accessToken: string, refreshToken: string) {
+const refreshOpts: CookieOptions = {
+  httpOnly: true,
+  secure,
+  sameSite: secure ? "none" : "lax",
+  path: "/api/v1/auth",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
+export function setAuthCookies(
+  res: Response,
+  accessToken: string,
+  refreshToken: string,
+) {
   res.cookie("access_token", accessToken, accessOpts);
   res.cookie("refresh_token", refreshToken, refreshOpts);
 }
