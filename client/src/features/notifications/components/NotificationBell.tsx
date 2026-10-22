@@ -3,15 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import {
   Bell,
-  Check,
-  CheckCheck,
   ChevronRight,
   LoaderCircle,
-  Package,
-  Star,
-  Trash2,
-  UserRound,
-  Info,
 } from "lucide-react";
 import NotificationItem from "./NotificationItem";
 
@@ -22,57 +15,6 @@ import {
   useNotifications,
 } from "../notifications.queries";
 
-function getIcon(type: string) {
-  switch (type.toUpperCase()) {
-    case "ORDER":
-    case "PRODUCT":
-      return Package;
-    case "USER":
-      return UserRound;
-    case "REVIEW":
-      return Star;
-    default:
-      return Info;
-  }
-}
-
-function getIconStyle(type: string) {
-  switch (type.toUpperCase()) {
-    case "ORDER":
-      return "bg-orange-50 text-orange-600";
-    case "PRODUCT":
-      return "bg-rose-50 text-rose-600";
-    case "REVIEW":
-      return "bg-amber-50 text-amber-600";
-    case "USER":
-      return "bg-blue-50 text-blue-600";
-    default:
-      return "bg-emerald-50 text-emerald-700";
-  }
-}
-
-function formatTime(date: string) {
-  const timestamp = new Date(date).getTime();
-
-  if (Number.isNaN(timestamp)) return "";
-
-  const minutes = Math.max(0, Math.floor((Date.now() - timestamp) / 60000));
-
-  if (minutes < 1) return "Just now";
-  if (minutes < 60) return `${minutes}m ago`;
-
-  const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-
-  const days = Math.floor(hours / 24);
-  if (days === 1) return "Yesterday";
-  if (days < 7) return `${days}d ago`;
-
-  return new Intl.DateTimeFormat("en-IN", {
-    day: "numeric",
-    month: "short",
-  }).format(new Date(date));
-}
 
 type NotificationBellProps = {
   onUnreadCountChange?: (count: number) => void;

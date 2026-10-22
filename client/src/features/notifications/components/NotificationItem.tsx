@@ -2,7 +2,6 @@
 import {
   Bell,
   Check,
-  Info,
   Package,
   Star,
   Trash2,

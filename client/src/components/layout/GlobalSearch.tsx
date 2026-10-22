@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Search,
-  X,
   Package,
   Tag,
   ShoppingBag,
@@ -133,13 +132,6 @@ export default function GlobalSearch() {
     navigate(result.url);
   };
 
-  const handleClear = () => {
-    setQuery("");
-    setResults([]);
-    setError("");
-    setOpen(true);
-    inputRef.current?.focus();
-  };
 
   return (
     <div ref={wrapperRef} className="relative w-full max-w-md">

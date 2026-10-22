@@ -21,7 +21,7 @@ import {
 import { toast } from "sonner";
 
 import { useAdminOrders, useUpdateAdminOrderStatus } from "./orders.queries";
-import type { AdminOrder, OrderStatus } from "./orders.api";
+import type { OrderStatus } from "./orders.api";
 
 const statuses: OrderStatus[] = [
   "PENDING_PAYMENT",

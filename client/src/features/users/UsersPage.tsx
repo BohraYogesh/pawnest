@@ -8,7 +8,6 @@ import {
   PawPrint,
   ShoppingBag,
   X,
-  UserRound,
   Mail,
   Phone,
   CalendarDays,

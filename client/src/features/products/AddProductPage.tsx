@@ -110,14 +110,6 @@ function newVariant(): VariantDraft {
   };
 }
 
-function formatRupees(pricePaise: number) {
-  return new Intl.NumberFormat("en-IN", {
-    style: "currency",
-    currency: "INR",
-    maximumFractionDigits: 2,
-  }).format(pricePaise / 100);
-}
-
 export default function AddProductPage() {
   const { productId } = useParams<{ productId: string }>();
   const navigate = useNavigate();
@@ -128,12 +120,12 @@ export default function AddProductPage() {
   const [saving, setSaving] = useState(false);
   const [uploadMessage, setUploadMessage] = useState("");
   const [categories, setCategories] = useState<Category[]>([]);
-  const [existingProduct, setExistingProduct] = useState<Product | null>(null);
+  const [, setExistingProduct] = useState<Product | null>(null);
   const [images, setImages] = useState<ProductImage[]>([]);
   const [selectedImages, setSelectedImages] = useState<SelectedImage[]>([]);
   const [dragging, setDragging] = useState(false);
   const [variants, setVariants] = useState<VariantDraft[]>([newVariant()]);
-  const [originalVariants, setOriginalVariants] = useState<ProductVariant[]>(
+  const [, setOriginalVariants] = useState<ProductVariant[]>(
     [],
   );
   const [deletedVariantIds, setDeletedVariantIds] = useState<string[]>([]);
