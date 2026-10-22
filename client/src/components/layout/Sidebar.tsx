@@ -10,7 +10,6 @@ import {
   Settings,
   X,
   LogOut,
-  LoaderCircle,
   PawPrint,
 } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -227,7 +226,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 Cancel
               </button>
 
-              <button
+              {/* <button
                 type="button"
                 disabled={logoutMutation.isPending}
                 onClick={handleLogout}
@@ -241,7 +240,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 ) : (
                   "Yes, Logout"
                 )}
-              </button>
+              </button> */}
             </div>
           </section>
         </div>
