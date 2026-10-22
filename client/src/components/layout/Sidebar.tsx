@@ -52,9 +52,9 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
     },
   });
 
-  function handleLogout() {
-    logoutMutation.mutate();
-  }
+  // function handleLogout() {
+  //   logoutMutation.mutate();
+  // }
 
   return (
     <>
