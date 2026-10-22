@@ -1,0 +1,66 @@
+
+# ==========================================
+# Environment Variables & Secrets
+# ==========================================
+.env
+.env.*
+!.env.example
+
+# ==========================================
+# Dependencies
+# ==========================================
+node_modules/
+**/node_modules/
+
+# ==========================================
+# Build Output
+# ==========================================
+dist/
+dist-ssr/
+.next/
+out/
+build/
+coverage/
+
+# ==========================================
+# Logs
+# ==========================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==========================================
+# Local Environment & Temporary Files
+# ==========================================
+*.local
+*.tmp
+*.temp
+
+# ==========================================
+# Editor Directories & Files
+# ==========================================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================================
+# TypeScript
+# ==========================================
+*.tsbuildinfo
+
+# ==========================================
+# Prisma Generated Files
+# ==========================================
+# Keep your Prisma schema and migrations tracked.
+# Ignore only generated client output if customized.
