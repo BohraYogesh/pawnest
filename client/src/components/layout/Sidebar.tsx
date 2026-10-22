@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import {
   LayoutDashboard,
   Package,
@@ -9,13 +8,9 @@ import {
   Star,
   Settings,
   X,
-  LogOut,
   PawPrint,
 } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "sonner";
-import { logoutUser } from "../../features/auth/auth.api";
+import { NavLink } from "react-router-dom";
 import sidebarPets from "../../assets/sidebar-pet.webp";
 
 interface SidebarProps {
@@ -33,29 +28,6 @@ const mainNavigation = [
 ];
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  const logoutMutation = useMutation({
-    mutationFn: logoutUser,
-    onSuccess: async () => {
-      await queryClient.cancelQueries();
-      queryClient.clear();
-      setShowLogoutConfirm(false);
-      onClose();
-      toast.success("Logged out successfully");
-      navigate("/login", { replace: true });
-    },
-    onError: () => {
-      toast.error("Logout failed. Please try again.");
-    },
-  });
-
-  // function handleLogout() {
-  //   logoutMutation.mutate();
-  // }
-
   return (
     <>
       {open && (
@@ -135,6 +107,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           {/* Divider above Settings */}
           <div className="my-5 shrink-0 border-t border-white/25" />
 
+          {/* Settings */}
           <div className="shrink-0">
             <NavLink
               to="/settings"
@@ -150,15 +123,6 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
               <Settings size={21} strokeWidth={1.8} />
               <span>Settings</span>
             </NavLink>
-
-            <button
-              type="button"
-              onClick={() => setShowLogoutConfirm(true)}
-              className="mt-1 flex min-h-[43px] w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm text-white/90 transition-colors hover:bg-white/10 hover:text-white"
-            >
-              <LogOut size={21} strokeWidth={1.8} />
-              <span>Logout</span>
-            </button>
           </div>
         </nav>
 
@@ -177,74 +141,6 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           />
         </div>
       </aside>
-
-      {/* Logout confirmation */}
-      {showLogoutConfirm && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/50 px-4 py-6 backdrop-blur-sm"
-          onMouseDown={(event) => {
-            if (
-              event.target === event.currentTarget &&
-              !logoutMutation.isPending
-            ) {
-              setShowLogoutConfirm(false);
-            }
-          }}
-        >
-          <section
-            role="alertdialog"
-            aria-modal="true"
-            aria-labelledby="logout-title"
-            aria-describedby="logout-description"
-            className="w-full max-w-sm rounded-2xl border border-slate-100 bg-white p-6"
-          >
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
-              <LogOut size={26} />
-            </div>
-
-            <h2
-              id="logout-title"
-              className="mt-4 text-center text-xl font-bold text-slate-900"
-            >
-              Confirm Logout
-            </h2>
-
-            <p
-              id="logout-description"
-              className="mt-2 text-center text-sm leading-6 text-slate-500"
-            >
-              Are you sure you want to log out of your PawNest Admin Panel?
-            </p>
-
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                disabled={logoutMutation.isPending}
-                onClick={() => setShowLogoutConfirm(false)}
-                className="rounded-xl border border-slate-200 px-4 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:opacity-50"
-              >
-                Cancel
-              </button>
-
-              {/* <button
-                type="button"
-                disabled={logoutMutation.isPending}
-                onClick={handleLogout}
-                className="flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
-              >
-                {logoutMutation.isPending ? (
-                  <>
-                    <LoaderCircle size={16} className="animate-spin" />
-                    Logging out
-                  </>
-                ) : (
-                  "Yes, Logout"
-                )}
-              </button> */}
-            </div>
-          </section>
-        </div>
-      )}
     </>
   );
 }
